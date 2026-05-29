@@ -1,0 +1,21 @@
+.primary-button {
+	background: var(--Button-Primary-Default);
+	color: var(--Text-Inverted);
+	border-radius: 15px;
+	border: 1px solid var(--Border-Default);
+	padding: 12px 0;
+	margin-top: 24px;
+	text-transform: none;
+	font-size: 16px;
+	min-height: 48px;
+	transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.primary-button:hover {
+	background: var(--Button-Primary-Hover);
+}
+
+.primary-button:active {
+	background: var(--Button-Primary-Pressed);
+	transform: scale(0.98);
+}

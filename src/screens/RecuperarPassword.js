@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useSignIn } from "@clerk/clerk-react" // Hook correto
 import { Box, Typography, TextField, Button, Link } from "@mui/material"
-import saxLogo from "../assets/sax.jpg"
+
 
 function RecuperarPassword() {
 	const { isLoaded, signIn } = useSignIn() // Hook de SignIn
@@ -26,17 +26,6 @@ function RecuperarPassword() {
 	return (
 		<Box sx={{ p: 3, display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'center', fontFamily: 'sans-serif' }}>
 
-			{/* Cabeçalho */}
-			<Box sx={{ display: 'flex', alignItems: 'center', mb: 6, justifyContent: 'center', gap: 2 }}>
-				<img
-					src={saxLogo}
-					alt="Logo"
-					style={{ width: '50px', height: '50px', objectFit: 'contain' }}
-				/>
-				<Typography sx={{ fontWeight: 700, fontSize: '18px', color: '#1A1A1A', fontFamily: 'sans-serif' }}>
-					GENERATIVE JAZZ
-				</Typography>
-			</Box>
 
 			{/* Título */}
 			<Typography sx={{ fontSize: "32px", fontWeight: 700, color: "#1A1A1A", mb: 3, fontFamily: 'sans-serif' }}>

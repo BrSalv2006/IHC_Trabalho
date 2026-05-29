@@ -1,0 +1,23 @@
+.header-container {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	margin-top: 62px;
+	gap: 10px;
+}
+
+.header-logo {
+	width: 105px;
+	height: 105px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.header-title {
+	color: var(--Text-Primary);
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1;
+	margin: 0;
+}

@@ -16,7 +16,6 @@
 	position: relative;
 }
 
-/* notch */
 .notch {
 	width: 140px;
 	height: 20px;
@@ -28,7 +27,6 @@
 	border-radius: 10px;
 }
 
-/* área do ecrã */
 .screen {
 	width: 100%;
 	height: 100%;

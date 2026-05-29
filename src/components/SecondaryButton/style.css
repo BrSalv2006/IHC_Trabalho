@@ -1,0 +1,21 @@
+.secondary-button {
+	background: var(--Button-Secondary-Default);
+	color: var(--Text-Inverted);
+	border-radius: 15px;
+	border: 1px solid var(--Border-Default);
+	padding: 12px 0;
+	margin-top: 24px;
+	text-transform: none;
+	font-size: 16px;
+	min-height: 48px;
+	transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.secondary-button:hover {
+	background: var(--Button-Secondary-Hover);
+}
+
+.secondary-button:active {
+	background: var(--Button-Secondary-Pressed);
+	transform: scale(0.98);
+}

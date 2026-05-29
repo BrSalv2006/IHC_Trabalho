@@ -1,4 +1,4 @@
-import "./SmartphoneFrame.css"
+import "./style.css"
 
 function SmartphoneFrame({ children }) {
 	return (

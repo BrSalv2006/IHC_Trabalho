@@ -1,0 +1,19 @@
+.custom-input-field .MuiOutlinedInput-root {
+	border-radius: 15px;
+}
+
+.custom-input-field .MuiOutlinedInput-root:hover:not(.Mui-error) .MuiOutlinedInput-notchedOutline {
+	border-color: var(--Border-Default);
+}
+
+.custom-input-field .MuiOutlinedInput-root.Mui-focused:not(.Mui-error) .MuiOutlinedInput-notchedOutline {
+	border-color: var(--Border-Default);
+}
+
+.custom-input-field label.Mui-focused:not(.Mui-error) {
+	color: var(--Border-Default);
+}
+
+.custom-input-field .MuiOutlinedInput-root.Mui-focused:not(.Mui-error) .MuiSvgIcon-root {
+	color: var(--Border-Default);
+}

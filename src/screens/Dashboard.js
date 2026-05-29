@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useUser, SignOutButton } from "@clerk/clerk-react"
 import { Box, Typography, Button, Menu, MenuItem, IconButton } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-import saxLogo from "../assets/sax.jpg"
+import saxLogo from "../assets/logo.jpg"
 
 function Dashboard() {
 	const { user } = useUser()
@@ -29,20 +29,20 @@ function Dashboard() {
 		<Box sx={{ p: 3, display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'sans-serif' }}>
 
 			{/* Cabeçalho */}
-			<Box sx={{ 
-				display: 'flex', 
-				alignItems: 'center', 
-				mb: 6, 
+			<Box sx={{
+				display: 'flex',
+				alignItems: 'center',
+				mb: 6,
 				justifyContent: 'space-between', // Separa o texto (esquerda) do logo (direita)
-				bgcolor: '#F9F7FD', 
-				p: 1.5, 
+				bgcolor: '#F9F7FD',
+				p: 1.5,
 				px: 3, // Maior espaçamento lateral para simular a "pílula" do Figma
-				borderRadius: '50px' 
+				borderRadius: '50px'
 			}}>
 				<Typography sx={{ fontWeight: 700, fontSize: '18px', color: '#1A1A1A' }}>
 					GENERATIVE JAZZ
 				</Typography>
-				
+
 				<IconButton onClick={handleMenuClick} sx={{ p: 0 }}>
 					<img src={saxLogo} alt="Logo Generative Jazz" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
 				</IconButton>
@@ -68,7 +68,7 @@ function Dashboard() {
 				<MenuItem onClick={handleAlterarPassword} sx={{ fontSize: '15px', py: 1.5, color: '#1A1A1A' }}>
 					Alterar password
 				</MenuItem>
-				
+
 				{/* O SignOutButton do Clerk pode envolver diretamente um MenuItem */}
 				<SignOutButton>
 					<MenuItem sx={{ fontSize: '15px', py: 1.5, color: '#1A1A1A' }}>

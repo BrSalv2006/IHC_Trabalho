@@ -1,0 +1,9 @@
+.text-button {
+	color: var(--Text-Secondary);
+	font-weight: bold;
+	text-transform: none;
+	font-size: 14px;
+	padding: 0;
+	min-width: auto;
+	vertical-align: baseline;
+}

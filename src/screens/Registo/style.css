@@ -1,0 +1,34 @@
+.register-content-box {
+	gap: 14px;
+}
+
+.register-main-title {
+	font-size: 32px;
+	font-weight: 700;
+	color: var(--Text-Primary);
+	margin: 0 0 0 0;
+	text-align: left;
+}
+
+.register-subtitle {
+	font-size: 16px;
+	color: var(--Text-Primary);
+	margin: 0 0 24px 0;
+	text-align: left;
+	line-height: 1.5;
+}
+
+.register-content-box form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.register-footer-text {
+	margin-top: 24px;
+	text-align: center;
+	font-size: 14px;
+	color: var(--Text-Primary);
+	width: 100%;
+}
