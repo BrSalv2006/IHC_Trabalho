@@ -17,3 +17,18 @@
 .custom-input-field .MuiOutlinedInput-root.Mui-focused:not(.Mui-error) .MuiSvgIcon-root {
 	color: var(--Border-Default);
 }
+
+.custom-input-field {
+	margin-bottom: 20px !important;
+}
+
+.custom-input-field .MuiFormHelperText-root {
+	position: absolute;
+	bottom: -22px;
+	white-space: nowrap !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	display: block !important;
+	margin-left: 14px;
+	margin-right: 14px;
+}

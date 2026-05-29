@@ -72,10 +72,10 @@ function Registo() {
 
 			await signUp.prepareEmailAddressVerification({ strategy: "email_code" })
 			setPendingVerification(true)
-		} catch (err) {
-			console.error("Erro no Clerk:", err)
+		} catch (error) {
+			console.error("Erro no Clerk:", error)
 
-			setApiError(err?.errors?.[0]?.longMessage || err?.errors?.[0]?.message || "Verifica os teus dados.")
+			setApiError(error?.errors?.[0]?.longMessage || error?.errors?.[0]?.message || "Verifica os teus dados.")
 			setOpenSnackbar(true)
 		} finally {
 			setLoading(false)
@@ -108,7 +108,7 @@ function Registo() {
 				await setActive({ session: completeSignUp.createdSessionId })
 				navigate("/")
 			}
-		} catch (err) {
+		} catch (or) {
 			setApiError("O código está incorreto ou expirou. Tenta novamente.")
 			setOpenSnackbar(true)
 		} finally {
