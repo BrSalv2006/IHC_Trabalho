@@ -153,7 +153,10 @@ function RecuperarPassword() {
 								disabled={loading}
 							/>
 
-							<PrimaryButton type="submit" loading={loading}>
+							<PrimaryButton
+								type="submit"
+								loading={loading}
+							>
 								Enviar Código
 							</PrimaryButton>
 						</form>
@@ -205,8 +208,11 @@ function RecuperarPassword() {
 								disabled={loading}
 							/>
 
-							<PrimaryButton type="submit" disabled={loading}>
-								{loading ? "A guardar..." : "Redefinir e Entrar"}
+							<PrimaryButton
+								type="submit"
+								loading={loading}
+							>
+								Redefinir e Entrar
 							</PrimaryButton>
 						</form>
 						<p className="recover-footer-text">

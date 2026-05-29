@@ -120,9 +120,9 @@ function Login() {
 
 					<PrimaryButton
 						type="submit"
-						disabled={loading}
+						loading={loading}
 					>
-						{loading ? "A entrar..." : "Entrar"}
+						Entrar
 					</PrimaryButton>
 				</form>
 
