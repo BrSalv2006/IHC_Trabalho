@@ -14,16 +14,15 @@ import "./style.css"
 
 function Login() {
 	const { isLoaded, signIn, setActive } = useSignIn()
+	const navigate = useNavigate()
+
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 
 	const [errors, setErrors] = useState({})
 	const [apiError, setApiError] = useState("")
 	const [openSnackbar, setOpenSnackbar] = useState(false)
-
 	const [loading, setLoading] = useState(false)
-
-	const navigate = useNavigate()
 
 	const handleCloseSnackbar = (event, reason) => {
 		if (reason === 'clickaway') {
@@ -34,11 +33,20 @@ function Login() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		if (!isLoaded || loading) return
+
+		if (!isLoaded || loading) {
+			return
+		}
 
 		const newErrors = {}
-		if (!email) newErrors.email = "O email é obrigatório."
-		if (!password) newErrors.password = "A password é obrigatória."
+
+		if (!email) {
+			newErrors.email = "O email é obrigatório."
+		}
+
+		if (!password) {
+			newErrors.password = "A password é obrigatória."
+		}
 
 		setErrors(newErrors)
 
@@ -55,7 +63,7 @@ function Login() {
 				navigate("/")
 			}
 		} catch (error) {
-			const errorCode = error.errors?.[0]?.code
+			const errorCode = error?.errors?.[0]?.code
 
 			if (errorCode === "form_password_incorrect") {
 				setApiError("A password está incorreta. Tenta novamente.")
@@ -78,12 +86,9 @@ function Login() {
 				<h1 className="login-main-title">Login</h1>
 				<form onSubmit={handleSubmit}>
 					<TextField
-						fullWidth
 						label="Email"
 						type="email"
 						autoComplete="email"
-						margin="normal"
-						variant="outlined"
 						value={email}
 						onChange={(e) => {
 							setEmail(e.target.value)
@@ -94,12 +99,9 @@ function Login() {
 						disabled={loading}
 					/>
 					<TextField
-						fullWidth
 						label="Password"
 						type="password"
 						autoComplete="current-password"
-						margin="normal"
-						variant="outlined"
 						value={password}
 						onChange={(e) => {
 							setPassword(e.target.value)
@@ -117,9 +119,7 @@ function Login() {
 					</TextButton>
 
 					<PrimaryButton
-						fullWidth
 						type="submit"
-						variant="contained"
 						disabled={loading}
 					>
 						{loading ? "A entrar..." : "Entrar"}
@@ -137,15 +137,14 @@ function Login() {
 			</ContentBox>
 			<Snackbar
 				open={openSnackbar}
-				autoHideDuration={1000000}
+				autoHideDuration={5000}
 				onClose={handleCloseSnackbar}
 				sx={{
 					position: 'absolute !important',
 					bottom: '32px !important',
 					left: '32px !important',
 					right: '32px !important',
-					width: 'auto !important',
-					transform: 'none !important',
+					width: 'auto !important'
 				}}
 			>
 				<Alert

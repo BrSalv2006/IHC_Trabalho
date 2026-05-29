@@ -1,37 +1,68 @@
-import React, { useState } from "react"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useSignUp } from "@clerk/clerk-react"
+import { Snackbar, Alert } from "@mui/material"
+
 import Page from '../../components/Page'
 import Header from '../../components/Header'
 import ContentBox from '../../components/ContentBox'
 import TextField from '../../components/TextField'
 import PrimaryButton from '../../components/PrimaryButton'
 import TextButton from '../../components/TextButton'
-import { useNavigate } from "react-router-dom"
-import "./style.css" // Importa os novos estilos otimizados
+
+import "./style.css"
 
 function Registo() {
 	const { isLoaded, signUp, setActive } = useSignUp()
+	const navigate = useNavigate()
 
-	// Estados para o formulário
 	const [nome, setNome] = useState("")
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
-
-	// Estados para a verificação do email
-	const [pendingVerification, setPendingVerification] = useState(false)
 	const [code, setCode] = useState("")
 
-	const navigate = useNavigate()
+	const [pendingVerification, setPendingVerification] = useState(false)
+	const [loading, setLoading] = useState(false)
+	const [errors, setErrors] = useState({})
+	const [apiError, setApiError] = useState("")
+	const [openSnackbar, setOpenSnackbar] = useState(false)
 
-	// Passo 1: Submeter os dados de registo
-	const handleSubmit = async (e) => {
-		e.preventDefault()
-		if (!isLoaded) return
-
-		if (password.length < 8) {
-			alert("A password tem de ter pelo menos 8 caracteres!")
+	const handleCloseSnackbar = (event, reason) => {
+		if (reason === 'clickaway') {
 			return
 		}
+		setOpenSnackbar(false)
+	}
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		if (!isLoaded || loading) {
+			return
+		}
+
+		const newErrors = {}
+
+		if (!nome) {
+			newErrors.nome = "O nome é obrigatório."
+		}
+
+		if (!email) {
+			newErrors.email = "O email é obrigatório."
+		}
+
+		if (!password) {
+			newErrors.password = "A password é obrigatória."
+		} else if (password.length < 8) {
+			newErrors.password = "A password tem de ter pelo menos 8 caracteres."
+		}
+
+		setErrors(newErrors)
+
+		if (Object.keys(newErrors).length > 0) {
+			return
+		}
+
+		setLoading(true)
 
 		try {
 			await signUp.create({
@@ -43,14 +74,32 @@ function Registo() {
 			setPendingVerification(true)
 		} catch (err) {
 			console.error("Erro no Clerk:", err)
-			alert("Erro ao registar: " + (err.errors?.[0]?.longMessage || err.errors?.[0]?.message || "Verifica os teus dados."))
+
+			setApiError(err?.errors?.[0]?.longMessage || err?.errors?.[0]?.message || "Verifica os teus dados.")
+			setOpenSnackbar(true)
+		} finally {
+			setLoading(false)
 		}
 	}
 
-	// Passo 2: Verificação do Código
 	const handleVerify = async (e) => {
 		e.preventDefault()
-		if (!isLoaded) return
+		if (!isLoaded || loading) {
+			return
+		}
+
+		const newErrors = {}
+
+		if (!code) {
+			newErrors.code = "O código é obrigatório."
+		}
+
+		setErrors(newErrors)
+		if (Object.keys(newErrors).length > 0) {
+			return
+		}
+
+		setLoading(true)
 
 		try {
 			const completeSignUp = await signUp.attemptEmailAddressVerification({ code })
@@ -60,7 +109,10 @@ function Registo() {
 				navigate("/")
 			}
 		} catch (err) {
-			alert("O código está incorreto ou expirou. Tenta novamente.")
+			setApiError("O código está incorreto ou expirou. Tenta novamente.")
+			setOpenSnackbar(true)
+		} finally {
+			setLoading(false)
 		}
 	}
 
@@ -68,51 +120,56 @@ function Registo() {
 		<Page>
 			<Header />
 			<ContentBox className="register-content-box">
-				{!pendingVerification && (
+				{!pendingVerification ? (
 					<>
 						<h1 className="register-main-title">Registar</h1>
-
 						<form onSubmit={handleSubmit}>
 							<TextField
-								fullWidth
 								label="Nome"
 								type="text"
 								autoComplete="name"
-								margin="normal"
-								variant="outlined"
 								value={nome}
-								onChange={(e) => setNome(e.target.value)}
+								onChange={(e) => {
+									setNome(e.target.value)
+									setErrors({ ...errors, nome: "" })
+								}}
+								error={Boolean(errors.nome)}
+								helperText={errors.nome}
+								disabled={loading}
 							/>
 							<TextField
-								fullWidth
 								label="Email"
 								type="email"
 								autoComplete="email"
-								margin="normal"
-								variant="outlined"
 								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+								onChange={(e) => {
+									setEmail(e.target.value)
+									setErrors({ ...errors, email: "" })
+								}}
+								error={Boolean(errors.email)}
+								helperText={errors.email}
+								disabled={loading}
 							/>
 							<TextField
-								fullWidth
 								label="Password"
 								type="password"
 								autoComplete="new-password"
-								margin="normal"
-								variant="outlined"
 								value={password}
-								onChange={(e) => setPassword(e.target.value)}
+								onChange={(e) => {
+									setPassword(e.target.value)
+									setErrors({ ...errors, password: "" })
+								}}
+								error={Boolean(errors.password)}
+								helperText={errors.password}
+								disabled={loading}
 							/>
-
 							<PrimaryButton
-								fullWidth
 								type="submit"
-								variant="contained"
+								loading={loading}
 							>
 								Registar
 							</PrimaryButton>
 						</form>
-
 						<p className="register-footer-text">
 							Já tem conta?{" "}
 							<TextButton
@@ -122,35 +179,58 @@ function Registo() {
 							</TextButton>
 						</p>
 					</>
-				)}
-				{pendingVerification && (
+				) : (
 					<>
 						<h1 className="register-main-title">Verifica o teu email</h1>
 						<p className="register-subtitle">
 							Enviámos um código para {email}. Insere-o abaixo para concluir o registo.
 						</p>
-
 						<form onSubmit={handleVerify}>
 							<TextField
-								fullWidth
 								label="Código de verificação"
-								margin="normal"
-								variant="outlined"
 								value={code}
-								onChange={(e) => setCode(e.target.value)}
+								onChange={(e) => {
+									setCode(e.target.value)
+									setErrors({ ...errors, code: "" })
+								}}
+								error={Boolean(errors.code)}
+								helperText={errors.code}
+								disabled={loading}
 							/>
-
 							<PrimaryButton
-								fullWidth
 								type="submit"
-								variant="contained"
+								loading={loading}
 							>
-								Verificar Código
+								Verificar Código"
 							</PrimaryButton>
 						</form>
 					</>
 				)}
 			</ContentBox>
+			<Snackbar
+				open={openSnackbar}
+				autoHideDuration={6000}
+				onClose={handleCloseSnackbar}
+				sx={{
+					position: 'absolute !important',
+					bottom: '32px !important',
+					left: '32px !important',
+					right: '32px !important',
+					width: 'auto !important'
+				}}
+			>
+				<Alert
+					onClose={handleCloseSnackbar}
+					severity="error"
+					sx={{
+						width: '100%',
+						borderRadius: '15px',
+						boxShadow: '0px 4px 12px rgba(0,0,0,0.1)'
+					}}
+				>
+					{apiError}
+				</Alert>
+			</Snackbar>
 		</Page>
 	)
 }
