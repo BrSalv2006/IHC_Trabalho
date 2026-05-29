@@ -12,12 +12,7 @@ const SplashScreen = () => {
 				flexDirection: "column",
 				justifyContent: "center",
 				alignItems: "center",
-
-				background: "linear-gradient(180deg, #FFF 72%, #E4A2F4 85%, #C845E9 92%, #7533BC 99.99%)",
-
-				position: "absolute",
-				top: 0,
-				left: 0,
+				background: "linear-gradient(180deg, #FFF 72%, #E4A2F4 85%, #C845E9 92%, #7533BC 99.99%)"
 			}}
 		>
 			{ }
@@ -30,8 +25,7 @@ const SplashScreen = () => {
 					backgroundImage: `url(${saxLogo})`,
 					backgroundSize: "80%",
 					backgroundRepeat: "no-repeat",
-					backgroundPosition: "center",
-					//boxShadow: "0px 10px 30px rgba(200, 69, 233, 0.3)",
+					backgroundPosition: "center"
 				}}
 			/>
 		</Box>
