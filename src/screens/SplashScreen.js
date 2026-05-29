@@ -1,5 +1,5 @@
 import React from "react"
-import { Box } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import saxLogo from "../assets/sax.jpg"
 
 const SplashScreen = () => {
@@ -15,7 +15,6 @@ const SplashScreen = () => {
 				background: "linear-gradient(180deg, #FFF 72%, #E4A2F4 85%, #C845E9 92%, #7533BC 99.99%)"
 			}}
 		>
-			{ }
 			<Box
 				sx={{
 					width: 168,
@@ -28,6 +27,29 @@ const SplashScreen = () => {
 					backgroundPosition: "center"
 				}}
 			/>
+			<Box
+				sx={{
+					display: "flex",
+					padding: "18.25px",
+					justifyContent: "center",
+					alignItems: "center",
+					gap: "18.25px"
+				}}
+			>
+
+			</Box>
+			<Typography
+				sx={{
+					color: "var(--Text-Primary, #1A1A1A)",
+					fontFamily: "Roboto, sans-serif",
+					fontSize: "32px",
+					fontStyle: "normal",
+					fontWeight: 700,
+					lineHeight: "36.5px"
+				}}
+			>
+				GENERATIVE JAZZ
+			</Typography>
 		</Box>
 	)
 }
