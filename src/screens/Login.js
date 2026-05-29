@@ -43,12 +43,22 @@ function Login() {
 
 			<form onSubmit={handleSubmit}>
 				<TextField
-					fullWidth label="Email" margin="normal" variant="outlined"
+					fullWidth
+					label="Email"
+					type="email"
+					autoComplete="email"
+					margin="normal"
+					variant="outlined"
 					onChange={(e) => setEmail(e.target.value)}
 					sx={{ '& .MuiOutlinedInput-root': { borderRadius: '15px' } }}
 				/>
 				<TextField
-					fullWidth label="Password" type="password" margin="normal" variant="outlined"
+					fullWidth
+					label="Password"
+					type="password"
+					autoComplete="current-password"
+					margin="normal"
+					variant="outlined"
 					onChange={(e) => setPassword(e.target.value)}
 					sx={{ '& .MuiOutlinedInput-root': { borderRadius: '15px' } }}
 				/>

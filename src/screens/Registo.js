@@ -86,19 +86,34 @@ function Registo() {
 
 					<form onSubmit={handleSubmit}>
 						<TextField
-							fullWidth label="Nome" margin="normal" variant="outlined"
+							fullWidth
+							label="Nome"
+							type="text"
+							autoComplete="name"
+							margin="normal"
+							variant="outlined"
 							value={nome}
 							onChange={(e) => setNome(e.target.value)}
 							sx={{ '& .MuiOutlinedInput-root': { borderRadius: '15px' } }}
 						/>
 						<TextField
-							fullWidth label="Email" margin="normal" variant="outlined"
+							fullWidth
+							label="Email"
+							type="email"
+							autoComplete="email"
+							margin="normal"
+							variant="outlined"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							sx={{ '& .MuiOutlinedInput-root': { borderRadius: '15px' } }}
 						/>
 						<TextField
-							fullWidth label="Password" type="password" margin="normal" variant="outlined"
+							fullWidth
+							label="Password"
+							type="password"
+							autoComplete="new-password"
+							margin="normal"
+							variant="outlined"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							sx={{ '& .MuiOutlinedInput-root': { borderRadius: '15px' } }}
