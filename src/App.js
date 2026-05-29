@@ -16,6 +16,7 @@ import DetalhesSequencias from "./screens/DetalhesSequencias"
 import TelaCarregamento from "./screens/TelaCarregamento"
 import AlterarPassword from "./screens/AlterarPassword"
 import RecuperarPassword from "./screens/RecuperarPassword"
+import SignInPage from "./SignInPage"
 
 function App() {
 	const [loading, setLoading] = useState(() => !sessionStorage.getItem("hasSeenSplash"))
@@ -59,6 +60,7 @@ function App() {
 						<Route path="/detalhes-sequencias" element={<SignedIn><DetalhesSequencias /></SignedIn>} />
 						<Route path="/carregamento" element={<SignedIn><TelaCarregamento /></SignedIn>} />
 						<Route path="/alterar-password" element={<SignedIn><AlterarPassword /></SignedIn>} />
+						<Route path="/sign-in/*" element={<SignInPage />} />
 
 						{/* Fallback */}
 						<Route path="*" element={<Navigate to="/" />} />

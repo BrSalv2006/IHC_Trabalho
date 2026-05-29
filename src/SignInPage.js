@@ -1,27 +1,21 @@
 import { SignIn } from "@clerk/clerk-react"
-import SmartphoneFrame from "./components/SmartphoneFrame"
 
 function SignInPage() {
 	return (
-		<SmartphoneFrame>
-			<SignIn
-				appearance={{
-					elements: {
-						rootBox: {
-							width: "360px",
-							height: "100%",
-						},
-						card: {
-							width: "360px",
-							maxWidth: "360px",
-							height: "100%",
-							boxShadow: "none",
-							borderRadius: "0px",
-						},
+		<SignIn
+			appearance={{
+				elements: {
+					rootBox: {
+						width: "100%",
+						height: "100%",
 					},
-				}}
-			/>
-		</SmartphoneFrame>
+					cardBox: {
+						width: "100%",
+						height: "100%",
+					},
+				},
+			}}
+		/>
 	)
 }
 
