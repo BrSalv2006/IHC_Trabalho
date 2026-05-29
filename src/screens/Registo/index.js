@@ -123,7 +123,7 @@ function Registo() {
 				{!pendingVerification ? (
 					<>
 						<h1 className="register-main-title">Registar</h1>
-						<form onSubmit={handleSubmit}>
+						<form key="register-form" onSubmit={handleSubmit}>
 							<TextField
 								label="Nome"
 								type="text"
@@ -185,9 +185,11 @@ function Registo() {
 						<p className="register-subtitle">
 							Enviámos um código para {email}. Insere-o abaixo para concluir o registo.
 						</p>
-						<form onSubmit={handleVerify}>
+						<form key="verify-form" onSubmit={handleVerify}>
 							<TextField
 								label="Código de verificação"
+								type="text"
+								autoComplete="one-time-code"
 								value={code}
 								onChange={(e) => {
 									setCode(e.target.value)
