@@ -7,7 +7,6 @@ const BASE_URL = "https://genjazz-api.fly.dev"
 
 // Dicionário para traduzir os valores da API para o teu design no Figma
 const traduzirModulacao = (mod) => {
-<<<<<<< HEAD
 	const traducoes = {
 		"Dominant": "Dominante",
 		"Relative": "Relativa",
@@ -17,17 +16,6 @@ const traduzirModulacao = (mod) => {
 		"Chromatic": "Cromática"
 	}
 	return traducoes[mod] || mod
-=======
-    const traducoes = {
-        "Dominant": "Dominante",
-        "Relative": "Relativa",
-        "Subdominant": "Subdominante",
-        "Subdominat": "Subdominante", // Lida com o typo (erro) que está na API
-        "Parallel": "Paralela",
-        "Chromatic": "Cromática"
-    }
-    return traducoes[mod] || mod
->>>>>>> c09843e4db1404a9312edf99c345d2b11c6975af
 }
 
 function Modulacao() {
@@ -40,25 +28,11 @@ function Modulacao() {
 	const [modulacoes, setModulacoes] = useState([])
 	const [loading, setLoading] = useState(true)
 
-<<<<<<< HEAD
 	useEffect(() => {
 		const fetchModulations = async () => {
 			try {
 				const res = await fetch(`${BASE_URL}/api/modulations`)
 				const data = await res.json()
-=======
-    const handleSelection = (modulacaoOriginal) => {
-        // AQUI ESTÁ A CORREÇÃO:
-        // Avança primeiro para o ecrã de CARREGAMENTO, passando todos os parâmetros recolhidos!
-        navigate("/carregamento", { 
-            state: { 
-                selectedKey, 
-                selectedStructure, 
-                selectedModulation: modulacaoOriginal 
-            } 
-        })
-    }
->>>>>>> c09843e4db1404a9312edf99c345d2b11c6975af
 
 				// Extrai as strings da API
 				const allModulations = data.map(m => m.modulation ?? m)
@@ -66,7 +40,6 @@ function Modulacao() {
 				// Removemos o "Random" da lista principal, pois tem um botão próprio em baixo
 				const filteredModulations = allModulations.filter(m => m.toLowerCase() !== "random")
 
-<<<<<<< HEAD
 				setModulacoes(filteredModulations)
 			} catch (err) {
 				console.error("Erro ao carregar modulações:", err)
@@ -76,47 +49,6 @@ function Modulacao() {
 		}
 		fetchModulations()
 	}, [])
-=======
-            {/* Lista de Modulações (Meio do Ecrã) */}
-            <Box sx={{ 
-                flex: 1, 
-                overflowY: 'auto', 
-                display: 'flex', 
-                flexDirection: 'column', 
-                justifyContent: 'center', // Centra os botões verticalmente
-                gap: 2, 
-                mb: 4 
-            }}>
-                {loading ? (
-                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <CircularProgress color="secondary" />
-                    </Box>
-                ) : (
-                    modulacoes.map((mod, index) => (
-                        <Button 
-                            key={index} 
-                            fullWidth 
-                            variant="contained" 
-                            onClick={() => handleSelection(mod)} // Envia o valor original (Inglês)
-                            sx={{ 
-                                bgcolor: '#C845E9', 
-                                color: '#FFF',
-                                border: '1px solid #1A1A1A', // Borda escura igual ao Figma
-                                borderRadius: '15px', 
-                                py: 1.5, 
-                                textTransform: 'none', 
-                                fontSize: '16px', 
-                                boxShadow: 'none',
-                                '&:hover': { bgcolor: '#b034d1', boxShadow: 'none' } 
-                            }}
-                        >
-                            {/* Mostra o valor traduzido para Português */}
-                            {traduzirModulacao(mod)}
-                        </Button>
-                    ))
-                )}
-            </Box>
->>>>>>> c09843e4db1404a9312edf99c345d2b11c6975af
 
 	const handleSelection = (modulacaoOriginal) => {
 		// Avança para o ecrã de Geração passando todos os parâmetros recolhidos

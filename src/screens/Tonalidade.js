@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Typography, Button, IconButton } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-
+import logo from "../assets/logo.jpg"
 
 // Função auxiliar matemática para desenhar cada "fatia" do círculo em SVG
 const renderWedge = (cx, cy, rIn, rOut, angle, data, isInner, handleSelection) => {
@@ -67,7 +67,7 @@ function Tonalidade() {
 			<Box sx={{ display: 'flex', alignItems: 'center', mb: 3, justifyContent: 'space-between', bgcolor: '#FDF5FF', p: 1.5, px: 2, borderRadius: '50px' }}>
 				<IconButton onClick={() => navigate(-1)} sx={{ p: 0, color: '#1A1A1A' }}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></IconButton>
 				<Typography sx={{ fontWeight: 700, fontSize: '16px', color: '#1A1A1A' }}>GENERATIVE JAZZ</Typography>
-				<img src={saxLogo} alt="Logo" style={{ width: '35px', height: '35px', objectFit: 'contain' }} />
+				<img src={logo} alt="Logo" style={{ width: '35px', height: '35px', objectFit: 'contain' }} />
 			</Box>
 
 			<Typography sx={{ fontSize: "28px", fontWeight: 700, color: "#1A1A1A", mb: 2, textAlign: 'center' }}>Escolher Tonalidade</Typography>

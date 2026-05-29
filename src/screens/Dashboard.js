@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useUser, SignOutButton } from "@clerk/clerk-react"
 import { Box, Typography, Button, Menu, MenuItem, IconButton } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-import saxLogo from "../assets/logo.jpg"
+import logo from "../assets/logo.jpg"
 
 function Dashboard() {
 	const { user } = useUser()
@@ -44,7 +44,7 @@ function Dashboard() {
 				</Typography>
 
 				<IconButton onClick={handleMenuClick} sx={{ p: 0 }}>
-					<img src={saxLogo} alt="Logo Generative Jazz" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+					<img src={logo} alt="Logo Generative Jazz" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
 				</IconButton>
 			</Box>
 
