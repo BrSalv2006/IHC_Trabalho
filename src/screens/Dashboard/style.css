@@ -1,52 +1,11 @@
-/* src/screens/Dashboard/style.css */
-
-.dashboard-page {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.dashboard-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #F9F7FD;
-    padding: 12px 24px;
-    border-radius: 50px;
-    margin-bottom: 48px;
-    box-sizing: border-box;
-}
-
-.dashboard-brand {
-    font-weight: 700 !important;
-    font-size: 18px !important;
-    color: var(--Text-Primary);
-}
-
-.dashboard-logo {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+.dashboard-content-box {
+	gap: 14px;
 }
 
 .dashboard-greeting {
-    font-size: 32px !important;
-    font-weight: 700 !important;
-    color: var(--Text-Primary);
-    margin-bottom: 48px !important;
-    text-align: center;
-}
-
-.dashboard-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-}
-
-.dashboard-menu-paper {
-    border-radius: 15px !important;
-    background-color: #F9F7FD !important;
-    min-width: 180px !important;
+	font-size: 32px;
+	font-weight: 700;
+	color: var(--Text-Primary);
+	margin: 0 0 0 0;
+	text-align: left;
 }

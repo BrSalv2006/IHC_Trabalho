@@ -1,56 +1,82 @@
 import React, { useState } from "react"
 import { useUser, SignOutButton } from "@clerk/clerk-react"
 import { useNavigate } from "react-router-dom"
-import { Menu, MenuItem, IconButton, Box, Typography } from "@mui/material"
+import { Menu, MenuItem } from "@mui/material"
 
 import Page from '../../components/Page'
+import Appbar from '../../components/Appbar'
 import ContentBox from '../../components/ContentBox'
 import PrimaryButton from '../../components/PrimaryButton'
-import logo from "../../assets/logo.jpg"
 
 import "./style.css"
 
 function Dashboard() {
-    const { user } = useUser()
-    const navigate = useNavigate()
-    const [anchorEl, setAnchorEl] = useState(null)
+	const { user } = useUser()
+	const navigate = useNavigate()
+	const [anchorEl, setAnchorEl] = useState(null)
 
-    return (
-        <Page className="dashboard-page">
-            <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                {/* Cabeçalho "pílula" */}
-                <Box className="dashboard-header">
-                    <Typography className="dashboard-brand">GENERATIVE JAZZ</Typography>
-                    <IconButton onClick={(e) => setAnchorEl(e.currentTarget)} sx={{ p: 0 }}>
-                        <img src={logo} alt="Logo" className="dashboard-logo" />
-                    </IconButton>
-                </Box>
+	const handleOpenMenu = (e) => {
+		setAnchorEl(e.currentTarget)
+	}
 
-                <Typography className="dashboard-greeting">
-                    Olá, {user?.firstName || "Júlia"}!
-                </Typography>
+	const handleCloseMenu = () => {
+		setAnchorEl(null)
+	}
 
-                {/* Ao usar o PrimaryButton, ele herda a borda preta do seu style.css */}
-                <ContentBox className="dashboard-actions">
-                    <PrimaryButton onClick={() => navigate("/tonalidade")}>
-                        Criar nova sequência
-                    </PrimaryButton>
-                    <PrimaryButton onClick={() => navigate("/minhas-sequencias")}>
-                        As minhas sequências
-                    </PrimaryButton>
-                </ContentBox>
-            </Box>
+	const handleNavigateTonalidade = () => {
+		navigate("/tonalidade")
+	}
 
-            <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
-                <MenuItem onClick={() => { setAnchorEl(null); navigate("/alterar-password"); }}>
-                    Alterar password
-                </MenuItem>
-                <SignOutButton>
-                    <MenuItem>Sair</MenuItem>
-                </SignOutButton>
-            </Menu>
-        </Page>
-    )
+	const handleNavigateSequencias = () => {
+		navigate("/minhas-sequencias")
+	}
+
+	const handleNavigateAlterarPassword = () => {
+		setAnchorEl(null)
+		navigate("/alterar-password")
+	}
+
+	return (
+		<Page>
+			<Appbar onLogoClick={handleOpenMenu} />
+			<ContentBox className="dashboard-content-box">
+				<h1 className="dashboard-greeting">Olá, {user?.firstName || "Músico"}!</h1>
+				<PrimaryButton onClick={handleNavigateTonalidade}>
+					Criar nova sequência
+				</PrimaryButton>
+				<PrimaryButton onClick={handleNavigateSequencias}>
+					As minhas sequências
+				</PrimaryButton>
+			</ContentBox>
+			<Menu
+				anchorEl={anchorEl}
+				open={Boolean(anchorEl)}
+				onClose={handleCloseMenu}
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'right'
+				}}
+				transformOrigin={{
+					vertical: 'top',
+					horizontal: 'right',
+				}}
+				PaperProps={{
+					sx: {
+						borderRadius: '15px',
+						boxShadow: '0px 4px 12px rgba(0,0,0,0.1)',
+						minWidth: '180px'
+					}
+				}}
+			>
+				<MenuItem onClick={handleNavigateAlterarPassword}>
+					Alterar password
+				</MenuItem>
+				<SignOutButton>
+					<MenuItem>Sair</MenuItem>
+				</SignOutButton>
+			</Menu>
+		</Page >
+	)
 }
 
 export default Dashboard
