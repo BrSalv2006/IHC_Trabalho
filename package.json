@@ -1,9 +1,9 @@
 {
-  "name": "ihc_trabalho",
+  "name": "ihc_proj_p2_53588_53640_53754",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@clerk/clerk-react": "^5.61.8",
+    "@clerk/clerk-react": "^5.61.7",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^9.0.1",
@@ -14,7 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router-dom": "^7.16.0",
+    "react-router-dom": "^7.15.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
