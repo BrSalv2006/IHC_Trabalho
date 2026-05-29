@@ -11,7 +11,7 @@ const traduzirModulacao = (mod) => {
         "Dominant": "Dominante",
         "Relative": "Relativa",
         "Subdominant": "Subdominante",
-        "Subdominat": "Subdominante", // Lida com o typo (erro) que está no enunciado PDF
+        "Subdominat": "Subdominante", // Lida com o typo (erro) que está na API
         "Parallel": "Paralela",
         "Chromatic": "Cromática"
     }
@@ -51,8 +51,9 @@ function Modulacao() {
     }, [])
 
     const handleSelection = (modulacaoOriginal) => {
-        // Avança para o ecrã de Geração passando todos os parâmetros recolhidos
-        navigate("/sequencia-gerada", { 
+        // AQUI ESTÁ A CORREÇÃO:
+        // Avança primeiro para o ecrã de CARREGAMENTO, passando todos os parâmetros recolhidos!
+        navigate("/carregamento", { 
             state: { 
                 selectedKey, 
                 selectedStructure, 
@@ -119,7 +120,7 @@ function Modulacao() {
                             key={index} 
                             fullWidth 
                             variant="contained" 
-                            onClick={() => handleSelection(mod)} // Envia o valor original (Inglês) para a API
+                            onClick={() => handleSelection(mod)} // Envia o valor original (Inglês)
                             sx={{ 
                                 bgcolor: '#C845E9', 
                                 color: '#FFF',
