@@ -46,4 +46,8 @@
 	flex-direction: column;
 	width: 100%;
 	gap: 12px;
+	padding-top: 16px;
+	border-top: 1px solid var(--Border-Disabled);
+	box-sizing: border-box;
+	flex-shrink: 0;
 }

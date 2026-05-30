@@ -152,14 +152,6 @@ function SequenciaGerada() {
 					) : progression ? (
 						<>
 							<SequenceGrid chords={progression.chords} />
-							{audioUrl && (
-								<audio
-									className="generated-audio"
-									controls
-									src={audioUrl}
-									autoPlay
-								/>
-							)}
 						</>
 					) : (
 						<p className="generated-feedback">
@@ -169,9 +161,17 @@ function SequenciaGerada() {
 				</div>
 
 				<div className="generated-buttons-container">
+					{audioUrl && (
+						<audio
+							className="generated-audio"
+							controls
+							src={audioUrl}
+							autoPlay
+						/>
+					)}
 					<PrimaryButton
 						onClick={handlePlay}
-						disabled={!progression || audioLoading || Boolean(audioUrl)}
+						disabled={!progression || audioLoading}
 					>
 						{audioLoading ? <CircularProgress size={24} color="inherit" /> : "Ouvir"}
 					</PrimaryButton>
