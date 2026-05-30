@@ -10,6 +10,7 @@ const CustomTextField = forwardRef((props, ref) => {
 		className = "",
 		helperText,
 		FormHelperTextProps,
+		slotProps = {},
 		...rest
 	} = props
 
@@ -29,9 +30,13 @@ const CustomTextField = forwardRef((props, ref) => {
 			margin={margin}
 			className={`custom-input-field ${className}`}
 			helperText={helperText}
-			FormHelperTextProps={{
-				title: tooltipText,
-				...FormHelperTextProps
+			slotProps={{
+				...slotProps,
+				formHelperText: {
+					title: tooltipText,
+					...FormHelperTextProps,
+					...slotProps.formHelperText,
+				},
 			}}
 			{...rest}
 		/>

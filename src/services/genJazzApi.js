@@ -38,6 +38,20 @@ const normalizeList = (data, key) => {
 
 const apiPathValue = (value) => encodeURIComponent(String(value || "Random"))
 
+const sequencePayload = ({
+	email,
+	chords,
+	key,
+	structure = "Random",
+	modulation = "Random",
+}) => ({
+	email,
+	chords,
+	key,
+	structure,
+	modulation,
+})
+
 export const getStructures = async () => {
 	const response = await fetch(`${API_BASE_URL}/api/structures`)
 	const data = await readJson(response, "Não foi possível carregar as estruturas.")
@@ -82,12 +96,34 @@ export const saveSequence = async ({
 	structure = "Random",
 	modulation = "Random",
 }) => {
-	const response = await fetch(
-		`${API_BASE_URL}/api/chords/${apiPathValue(email)}/${apiPathValue(chords)}/${apiPathValue(key)}/${apiPathValue(structure)}/${apiPathValue(modulation)}`,
+	const payload = sequencePayload({
+		email,
+		chords,
+		key,
+		structure,
+		modulation,
+	})
+
+	const bodyResponse = await fetch(`${API_BASE_URL}/api/chords`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(payload),
+	})
+
+	if (bodyResponse.ok) {
+		return
+	}
+
+	if (bodyResponse.status !== 404 && bodyResponse.status !== 405) {
+		throw new Error(`Não foi possível guardar a sequência. (${bodyResponse.status})`)
+	}
+
+	const pathResponse = await fetch(
+		`${API_BASE_URL}/api/chords/${apiPathValue(payload.email)}/${apiPathValue(payload.chords)}/${apiPathValue(payload.key)}/${apiPathValue(payload.structure)}/${apiPathValue(payload.modulation)}`,
 		{ method: "POST" }
 	)
 
-	ensureOk(response, "Não foi possível guardar a sequência.")
+	ensureOk(pathResponse, "Não foi possível guardar a sequência.")
 }
 
 export const getUserSequences = async (email) => {
