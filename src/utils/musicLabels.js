@@ -1,14 +1,16 @@
-export const translateModulation = (modulation) => {
-	const labels = {
-		Dominant: "Dominante",
-		Relative: "Relativa",
-		Subdominant: "Subdominante",
-		Subdominat: "Subdominante",
-		Parallel: "Paralela",
-		Chromatic: "Cromática",
-	}
-
-	return labels[modulation] || modulation
+const optionLabels = {
+	Random: "Aleatório",
+	None: "Nenhuma",
+	Dominant: "Dominante",
+	Relative: "Relativa",
+	Subdominant: "Subdominante",
+	Subdominat: "Subdominante",
+	Parallel: "Paralela",
+	Chromatic: "Cromática",
 }
 
-export const visibleStructures = ["AABA", "AABC", "ABAB"]
+export const formatMusicOptionLabel = (value) => optionLabels[value] || value
+
+export const formatStructureLabel = (structure) => formatMusicOptionLabel(structure)
+
+export const formatModulationLabel = (modulation) => formatMusicOptionLabel(modulation)

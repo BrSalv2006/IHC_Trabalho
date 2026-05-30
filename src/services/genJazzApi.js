@@ -1,12 +1,25 @@
 export const API_BASE_URL = process.env.REACT_APP_GENJAZZ_API_URL || "https://genjazz-api.fly.dev"
 
-const readJson = async (response, fallbackMessage) => {
+const ensureOk = (response, fallbackMessage) => {
 	if (!response.ok) {
 		throw new Error(`${fallbackMessage} (${response.status})`)
 	}
+}
+
+const readJson = async (response, fallbackMessage) => {
+	ensureOk(response, fallbackMessage)
 
 	const text = await response.text()
-	return text ? JSON.parse(text) : null
+
+	if (!text) {
+		return null
+	}
+
+	try {
+		return JSON.parse(text)
+	} catch {
+		throw new Error(`${fallbackMessage} Resposta inválida.`)
+	}
 }
 
 const normalizeList = (data, key) => {
@@ -14,10 +27,16 @@ const normalizeList = (data, key) => {
 		return []
 	}
 
-	return data.map((item) => item?.[key] ?? item)
+	const values = data
+		.map((item) => item?.[key] ?? item)
+		.filter((item) => item !== null && item !== undefined)
+		.map((item) => String(item).trim())
+		.filter(Boolean)
+
+	return [...new Set(values)]
 }
 
-const apiPathValue = (value) => encodeURIComponent(value || "Random")
+const apiPathValue = (value) => encodeURIComponent(String(value || "Random"))
 
 export const getStructures = async () => {
 	const response = await fetch(`${API_BASE_URL}/api/structures`)
@@ -49,7 +68,7 @@ export const getSequenceAudioUrl = async (chords) => {
 	const response = await fetch(`${API_BASE_URL}/api/chords2mp3/${encodeURIComponent(chords)}`)
 	const data = await readJson(response, "Não foi possível gerar o áudio.")
 
-	if (!data.mp3_url) {
+	if (!data?.mp3_url) {
 		throw new Error("A API não devolveu um ficheiro de áudio.")
 	}
 
@@ -63,19 +82,12 @@ export const saveSequence = async ({
 	structure = "Random",
 	modulation = "Random",
 }) => {
-	const response = await fetch(`${API_BASE_URL}/api/chords`, {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({
-			email,
-			chords,
-			key,
-			structure,
-			modulation,
-		}),
-	})
+	const response = await fetch(
+		`${API_BASE_URL}/api/chords/${apiPathValue(email)}/${apiPathValue(chords)}/${apiPathValue(key)}/${apiPathValue(structure)}/${apiPathValue(modulation)}`,
+		{ method: "POST" }
+	)
 
-	return readJson(response, "Não foi possível guardar a sequência.")
+	ensureOk(response, "Não foi possível guardar a sequência.")
 }
 
 export const getUserSequences = async (email) => {

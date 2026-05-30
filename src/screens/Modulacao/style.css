@@ -1,4 +1,6 @@
 .modulacao-content-box {
+	flex: 1;
+	min-height: 0;
 	gap: 24px;
 }
 
@@ -10,12 +12,21 @@
 	text-align: center;
 }
 
-.modulacao-buttons-container {
+.modulacao-options-container {
 	display: flex;
+	flex: 1;
+	min-height: 0;
 	flex-direction: column;
 	width: 100%;
 	gap: 12px;
 	align-items: center;
+	overflow-y: auto;
+	padding-right: 4px;
+	box-sizing: border-box;
+}
+
+.modulacao-footer {
+	width: 100%;
 }
 
 .modulacao-feedback {
