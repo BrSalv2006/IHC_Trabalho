@@ -1,7 +1,6 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useUser } from "@clerk/clerk-react"
 import { useNavigate } from "react-router-dom"
-import { Snackbar, Alert } from "@mui/material"
 
 import Page from '../../components/Page'
 import Header from '../../components/Header'
@@ -9,6 +8,7 @@ import ContentBox from '../../components/ContentBox'
 import TextField from '../../components/TextField'
 import PrimaryButton from '../../components/PrimaryButton'
 import TextButton from '../../components/TextButton'
+import ScreenSnackbar from "../../components/ScreenSnackbar"
 
 import "./style.css"
 
@@ -134,30 +134,14 @@ function AlterarPassword() {
 					</TextButton>
 				</div>
 			</ContentBox>
-			<Snackbar
+			<ScreenSnackbar
 				open={openSnackbar}
 				autoHideDuration={6000}
 				onClose={handleCloseSnackbar}
-				sx={{
-					position: 'absolute !important',
-					bottom: '32px !important',
-					left: '32px !important',
-					right: '32px !important',
-					width: 'auto !important'
-				}}
+				severity={snackbarSeverity}
 			>
-				<Alert
-					onClose={handleCloseSnackbar}
-					severity={snackbarSeverity}
-					sx={{
-						width: '100%',
-						borderRadius: '15px',
-						boxShadow: '0px 4px 12px rgba(0,0,0,0.1)'
-					}}
-				>
-					{apiMessage}
-				</Alert>
-			</Snackbar>
+				{apiMessage}
+			</ScreenSnackbar>
 		</Page>
 	)
 }

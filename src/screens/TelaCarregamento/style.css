@@ -1,0 +1,44 @@
+.loading-page {
+	align-items: center;
+	justify-content: center;
+}
+
+.loading-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+}
+
+.loading-logo {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.loading-text {
+	margin: 0;
+	font-size: 20px;
+	color: var(--Text-Primary);
+}
+
+.loading-dialog-paper {
+	border-radius: 20px !important;
+	padding: 8px;
+}
+
+.loading-dialog-title {
+	font-weight: 700 !important;
+	text-align: center;
+}
+
+.loading-dialog-text {
+	text-align: center;
+}
+
+.loading-dialog-actions {
+	justify-content: center !important;
+	padding: 0 16px 16px 16px !important;
+	gap: 8px;
+}

@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom/client"
 import { ClerkProvider } from "@clerk/clerk-react"
-import { StyledEngineProvider } from '@mui/material/styles'
+import { StyledEngineProvider } from "@mui/material/styles"
 import App from "./App"
-import './index.css'
+import "./index.css"
 
 const PUBLISHABLE_KEY = "pk_test_c3Rhci1mbGFtaW5nby0zMy5jbGVyay5hY2NvdW50cy5kZXYk"
 

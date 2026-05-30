@@ -1,0 +1,53 @@
+.details-content-box {
+	flex: 1;
+	min-height: 0;
+	gap: 20px;
+}
+
+.details-main-title {
+	width: 100%;
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--Text-Primary);
+	margin: 0;
+	text-align: center;
+}
+
+.details-scroll-area {
+	flex: 1;
+	min-height: 100px;
+	width: 100%;
+	overflow-y: auto;
+}
+
+.details-actions {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 12px;
+	padding-top: 16px;
+	border-top: 1px solid var(--Border-Disabled);
+	box-sizing: border-box;
+}
+
+.details-audio {
+	width: 100%;
+}
+
+.details-delete-button {
+	color: var(--Button-Primary-Default);
+}
+
+.details-dialog-paper {
+	border-radius: 20px !important;
+	padding: 8px;
+}
+
+.details-dialog-title {
+	font-weight: 700 !important;
+}
+
+.details-dialog-actions {
+	padding: 0 16px 16px 16px !important;
+	gap: 8px;
+}

@@ -9,3 +9,9 @@
 	margin: 0 0 0 0;
 	text-align: left;
 }
+
+.dashboard-menu-paper {
+	min-width: 180px;
+	border-radius: 15px !important;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}

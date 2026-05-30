@@ -1,11 +1,25 @@
 .estrutura-content-box {
-	gap: 0px;
+	gap: 24px;
 }
 
 .estrutura-main-title {
 	font-size: 28px;
 	font-weight: 700;
 	color: var(--Text-Primary);
-	margin: 0 0 0 0;
-	text-align: left;
+	margin: 0;
+	text-align: center;
+}
+
+.estrutura-buttons-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 12px;
+	align-items: center;
+}
+
+.estrutura-feedback {
+	margin: 0;
+	color: var(--Text-Primary);
+	text-align: center;
 }

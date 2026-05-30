@@ -1,5 +1,5 @@
 .tonalidade-content-box {
-	gap: 16px;
+	gap: 24px;
 }
 
 .tonalidade-main-title {
@@ -14,8 +14,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	gap: 0px;
-	margin-top: 8px;
+	gap: 12px;
 }
 
 .tonalidade-svg-container {
@@ -24,7 +23,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 16px 0;
+}
+
+.tonalidade-wheel {
+	max-width: 280px;
+	max-height: 280px;
 }
 
 .tonalidade-wedge-path {

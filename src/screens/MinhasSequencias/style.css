@@ -1,0 +1,87 @@
+.saved-content-box {
+	flex: 1;
+	min-height: 0;
+	gap: 24px;
+}
+
+.saved-main-title {
+	width: 100%;
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--Text-Primary);
+	margin: 0;
+	text-align: center;
+}
+
+.saved-list-area {
+	width: 100%;
+	flex: 1;
+	min-height: 0;
+	overflow-y: auto;
+}
+
+.saved-loading {
+	display: flex;
+	justify-content: center;
+	padding-top: 40px;
+}
+
+.saved-feedback {
+	margin: 0;
+	text-align: center;
+	color: var(--Text-Primary);
+}
+
+.saved-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.saved-list-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	width: 100%;
+	padding: 14px 16px;
+	border: 1px solid var(--Border-Default);
+	border-radius: 15px;
+	background: var(--Background-Main);
+	color: var(--Text-Primary);
+	text-align: left;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+.saved-list-item:hover {
+	background: var(--Background-Surface);
+}
+
+.saved-list-item span {
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.saved-list-item strong {
+	font-size: 16px;
+	line-height: 1.25;
+}
+
+.saved-list-item small {
+	font-size: 12px;
+	line-height: 1.35;
+	color: var(--Text-Primary);
+	overflow-wrap: anywhere;
+}
+
+.saved-list-icon {
+	flex-shrink: 0;
+	font-size: 16px !important;
+	color: var(--Text-Primary);
+}

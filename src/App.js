@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { SignedIn, SignedOut } from "@clerk/clerk-react"
 
@@ -17,6 +17,13 @@ import TelaCarregamento from "./screens/TelaCarregamento"
 import AlterarPassword from "./screens/AlterarPassword"
 import RecuperarPassword from "./screens/RecuperarPassword"
 import SignInPage from "./SignInPage"
+
+const ProtectedRoute = ({ children }) => (
+	<>
+		<SignedIn>{children}</SignedIn>
+		<SignedOut><Navigate to="/login" replace /></SignedOut>
+	</>
+)
 
 function App() {
 	const [loading, setLoading] = useState(() => !sessionStorage.getItem("hasSeenSplash"))
@@ -38,31 +45,21 @@ function App() {
 					<SplashScreen />
 				) : (
 					<Routes>
-						{/* Rotas Públicas */}
 						<Route path="/login" element={<Login />} />
 						<Route path="/registo" element={<Registo />} />
 						<Route path="/recuperar-password" element={<RecuperarPassword />} />
 
-						{/* Rota Raiz: Protegida */}
-						<Route path="/" element={
-							<>
-								<SignedIn><Dashboard /></SignedIn>
-								<SignedOut><Navigate to="/login" replace /></SignedOut>
-							</>
-						} />
-
-						{/* Rotas Protegidas */}
-						<Route path="/tonalidade" element={<SignedIn><Tonalidade /></SignedIn>} />
-						<Route path="/estrutura" element={<SignedIn><Estrutura /></SignedIn>} />
-						<Route path="/modulacao" element={<SignedIn><Modulacao /></SignedIn>} />
-						<Route path="/sequencia-gerada" element={<SignedIn><SequenciaGerada /></SignedIn>} />
-						<Route path="/minhas-sequencias" element={<SignedIn><MinhasSequencias /></SignedIn>} />
-						<Route path="/detalhes-sequencias" element={<SignedIn><DetalhesSequencias /></SignedIn>} />
-						<Route path="/carregamento" element={<SignedIn><TelaCarregamento /></SignedIn>} />
-						<Route path="/alterar-password" element={<SignedIn><AlterarPassword /></SignedIn>} />
+						<Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+						<Route path="/tonalidade" element={<ProtectedRoute><Tonalidade /></ProtectedRoute>} />
+						<Route path="/estrutura" element={<ProtectedRoute><Estrutura /></ProtectedRoute>} />
+						<Route path="/modulacao" element={<ProtectedRoute><Modulacao /></ProtectedRoute>} />
+						<Route path="/sequencia-gerada" element={<ProtectedRoute><SequenciaGerada /></ProtectedRoute>} />
+						<Route path="/minhas-sequencias" element={<ProtectedRoute><MinhasSequencias /></ProtectedRoute>} />
+						<Route path="/detalhes-sequencias" element={<ProtectedRoute><DetalhesSequencias /></ProtectedRoute>} />
+						<Route path="/carregamento" element={<ProtectedRoute><TelaCarregamento /></ProtectedRoute>} />
+						<Route path="/alterar-password" element={<ProtectedRoute><AlterarPassword /></ProtectedRoute>} />
 						<Route path="/sign-in/*" element={<SignInPage />} />
 
-						{/* Fallback */}
 						<Route path="*" element={<Navigate to="/" />} />
 					</Routes>
 				)}

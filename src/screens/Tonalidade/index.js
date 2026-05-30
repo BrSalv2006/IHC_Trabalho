@@ -1,4 +1,4 @@
-import React from "react"
+import { Fragment } from "react"
 import { useNavigate } from "react-router-dom"
 
 import Page from "../../components/Page"
@@ -88,12 +88,12 @@ function Tonalidade() {
 			<ContentBox className="tonalidade-content-box">
 				<h1 className="tonalidade-main-title">Escolher Tonalidade</h1>
 				<div className="tonalidade-svg-container">
-					<svg width="100%" height="100%" viewBox="0 0 300 300" style={{ maxWidth: '280px', maxHeight: '280px' }}>
+					<svg className="tonalidade-wheel" width="100%" height="100%" viewBox="0 0 300 300">
 						{keysData.map((data) => (
-							<React.Fragment key={data.angle}>
+							<Fragment key={data.angle}>
 								{renderWedge(150, 150, 90, 145, data.angle, data.outer, false, handleSelection)}
 								{renderWedge(150, 150, 45, 90, data.angle, data.inner, true, handleSelection)}
-							</React.Fragment>
+							</Fragment>
 						))}
 						<circle cx="150" cy="150" r="45" fill="#FFFFFF" stroke="#1A1A1A" strokeWidth="1" />
 					</svg>

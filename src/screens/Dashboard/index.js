@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useUser, SignOutButton } from "@clerk/clerk-react"
 import { useNavigate } from "react-router-dom"
 import { Menu, MenuItem } from "@mui/material"
@@ -61,11 +61,7 @@ function Dashboard() {
 					horizontal: 'right',
 				}}
 				PaperProps={{
-					sx: {
-						borderRadius: '15px',
-						boxShadow: '0px 4px 12px rgba(0,0,0,0.1)',
-						minWidth: '180px'
-					}
+					className: "dashboard-menu-paper"
 				}}
 			>
 				<MenuItem onClick={handleNavigateAlterarPassword}>
@@ -75,7 +71,7 @@ function Dashboard() {
 					<MenuItem>Sair</MenuItem>
 				</SignOutButton>
 			</Menu>
-		</Page >
+		</Page>
 	)
 }
 

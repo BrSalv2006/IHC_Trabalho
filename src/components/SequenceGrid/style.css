@@ -1,0 +1,33 @@
+.sequence-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	width: 100%;
+	border-top: 1px solid var(--Border-Default);
+	border-left: 1px solid var(--Border-Default);
+	box-sizing: border-box;
+}
+
+.sequence-grid-cell {
+	min-height: 52px;
+	padding: 10px 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.25;
+	color: var(--Text-Primary);
+	background: var(--Background-Surface);
+	border-right: 1px solid var(--Border-Default);
+	border-bottom: 1px solid var(--Border-Default);
+	box-sizing: border-box;
+	overflow-wrap: anywhere;
+}
+
+.sequence-grid-empty {
+	width: 100%;
+	margin: 0;
+	color: var(--Text-Primary);
+	text-align: center;
+}

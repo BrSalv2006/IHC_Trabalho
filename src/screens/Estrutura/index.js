@@ -1,150 +1,99 @@
-import React, { useState, useEffect } from "react"
-import { Box, Typography, Button, IconButton, CircularProgress } from "@mui/material"
+import { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
+import { CircularProgress } from "@mui/material"
 
+import Page from "../../components/Page"
+import Appbar from "../../components/Appbar"
+import ContentBox from "../../components/ContentBox"
+import PrimaryButton from "../../components/PrimaryButton"
+import SecondaryButton from "../../components/SecondaryButton"
+import { getStructures } from "../../services/genJazzApi"
+import { visibleStructures } from "../../utils/musicLabels"
 
-const BASE_URL = "https://genjazz-api.fly.dev"
+import "./style.css"
 
 function Estrutura() {
 	const navigate = useNavigate()
 	const location = useLocation()
 
-	// Recupera a tonalidade escolhida no ecrã anterior (ou assume Random se falhar)
 	const { selectedKey = "Random" } = location.state || {}
 
 	const [estruturas, setEstruturas] = useState([])
 	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState("")
 
 	useEffect(() => {
+		let isMounted = true
+
 		const fetchStructures = async () => {
 			try {
-				const res = await fetch(`${BASE_URL}/api/structures`)
-				const data = await res.json()
-
-				// Extrai as strings da resposta da API
-				const allStructures = data.map(s => s.structure ?? s)
-
-				// Define as estruturas exatas que desenhaste no Figma
-				const estruturasFigma = ["AABA", "AABC", "ABAB"]
-
-				// Filtra os resultados da API para mostrar apenas as do Figma
-				const fetchedStructures = allStructures.filter(s =>
-					estruturasFigma.includes(s)
+				const allStructures = await getStructures()
+				const fetchedStructures = allStructures.filter((structure) =>
+					visibleStructures.includes(structure)
 				)
 
-				setEstruturas(fetchedStructures)
+				if (isMounted) {
+					setEstruturas(fetchedStructures)
+				}
 			} catch (err) {
 				console.error("Erro ao carregar estruturas:", err)
+				if (isMounted) {
+					setError("Não foi possível carregar as estruturas.")
+				}
 			} finally {
-				setLoading(false)
+				if (isMounted) {
+					setLoading(false)
+				}
 			}
 		}
+
 		fetchStructures()
+
+		return () => {
+			isMounted = false
+		}
 	}, [])
 
 	const handleSelection = (estrutura) => {
-		// Avança para a Modulação passando a Tonalidade (key) e a Estrutura (structure)
 		navigate("/modulacao", { state: { selectedKey, selectedStructure: estrutura } })
 	}
 
 	return (
-		<Box sx={{
-			p: 2.5,
-			pb: 4, // Espaço extra no fundo para a frame do telemóvel não cortar os botões
-			display: 'flex',
-			flexDirection: 'column',
-			height: '100%',
-			boxSizing: 'border-box',
-			fontFamily: 'sans-serif'
-		}}>
-
-			{/* Cabeçalho */}
-
-
-			{/* Título */}
-			<Typography sx={{ fontSize: "28px", fontWeight: 700, color: "#1A1A1A", mb: 2, textAlign: 'center' }}>
-				Escolher Estrutura
-			</Typography>
-
-			{/* Lista de Estruturas (Meio do Ecrã) */}
-			<Box sx={{
-				flex: 1,
-				overflowY: 'auto',
-				display: 'flex',
-				flexDirection: 'column',
-				justifyContent: 'center', // Centra os botões verticalmente
-				gap: 2,
-				mb: 4
-			}}>
-				{loading ? (
-					<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+		<Page>
+			<Appbar showBackArrow />
+			<ContentBox className="estrutura-content-box">
+				<h1 className="estrutura-main-title">Escolher Estrutura</h1>
+				<div className="estrutura-buttons-container">
+					{loading ? (
 						<CircularProgress color="secondary" />
-					</Box>
-				) : (
-					estruturas.map((est, index) => (
-						<Button
-							key={index}
-							fullWidth
-							variant="contained"
-							onClick={() => handleSelection(est)}
-							sx={{
-								bgcolor: '#C845E9',
-								color: '#FFF',
-								border: '1px solid #1A1A1A', // Borda escura igual ao Figma
-								borderRadius: '15px',
-								py: 1.5,
-								textTransform: 'none',
-								fontSize: '16px',
-								boxShadow: 'none',
-								'&:hover': { bgcolor: '#b034d1', boxShadow: 'none' }
-							}}
-						>
-							{est}
-						</Button>
-					))
-				)}
-			</Box>
+					) : error ? (
+						<p className="estrutura-feedback">{error}</p>
+					) : (
+						estruturas.map((est, index) => (
+							<PrimaryButton
+								key={index}
+								onClick={() => handleSelection(est)}
+							>
+								{est}
+							</PrimaryButton>
+						))
+					)}
+				</div>
+				<div className="estrutura-buttons-container">
+					<PrimaryButton
+						onClick={() => handleSelection("Random")}
+					>
+						Aleatório
+					</PrimaryButton>
 
-			{/* Botões Inferiores Fixos */}
-			<Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-				<Button
-					fullWidth
-					variant="contained"
-					onClick={() => handleSelection("Random")}
-					sx={{
-						bgcolor: '#C845E9',
-						color: '#FFF',
-						border: '1px solid #1A1A1A',
-						borderRadius: '15px',
-						py: 1.5,
-						textTransform: 'none',
-						fontSize: '16px',
-						boxShadow: 'none',
-						'&:hover': { bgcolor: '#b034d1', boxShadow: 'none' }
-					}}
-				>
-					Aleatório
-				</Button>
-
-				<Button
-					fullWidth
-					variant="outlined"
-					onClick={() => navigate("/")}
-					sx={{
-						color: '#1A1A1A',
-						bgcolor: '#FDF5FF',
-						borderColor: '#1A1A1A',
-						borderRadius: '15px',
-						py: 1.5,
-						textTransform: 'none',
-						fontSize: '16px',
-						'&:hover': { bgcolor: '#EED8F2', borderColor: '#1A1A1A' }
-					}}
-				>
-					Cancelar
-				</Button>
-			</Box>
-		</Box>
+					<SecondaryButton
+						onClick={() => navigate("/")}
+					>
+						Cancelar
+					</SecondaryButton>
+				</div>
+			</ContentBox>
+		</Page>
 	)
 }
 

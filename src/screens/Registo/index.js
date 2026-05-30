@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSignUp } from "@clerk/clerk-react"
-import { Snackbar, Alert } from "@mui/material"
 
 import Page from '../../components/Page'
 import Header from '../../components/Header'
@@ -9,6 +8,7 @@ import ContentBox from '../../components/ContentBox'
 import TextField from '../../components/TextField'
 import PrimaryButton from '../../components/PrimaryButton'
 import TextButton from '../../components/TextButton'
+import ScreenSnackbar from "../../components/ScreenSnackbar"
 
 import "./style.css"
 
@@ -108,7 +108,8 @@ function Registo() {
 				await setActive({ session: completeSignUp.createdSessionId })
 				navigate("/")
 			}
-		} catch (or) {
+		} catch (error) {
+			console.error("Erro na verificação Clerk:", error)
 			setApiError("O código está incorreto ou expirou. Tenta novamente.")
 			setOpenSnackbar(true)
 		} finally {
@@ -203,36 +204,20 @@ function Registo() {
 								type="submit"
 								loading={loading}
 							>
-								Verificar Código"
+								Verificar Código
 							</PrimaryButton>
 						</form>
 					</>
 				)}
 			</ContentBox>
-			<Snackbar
+			<ScreenSnackbar
 				open={openSnackbar}
 				autoHideDuration={6000}
 				onClose={handleCloseSnackbar}
-				sx={{
-					position: 'absolute !important',
-					bottom: '32px !important',
-					left: '32px !important',
-					right: '32px !important',
-					width: 'auto !important'
-				}}
+				severity="error"
 			>
-				<Alert
-					onClose={handleCloseSnackbar}
-					severity="error"
-					sx={{
-						width: '100%',
-						borderRadius: '15px',
-						boxShadow: '0px 4px 12px rgba(0,0,0,0.1)'
-					}}
-				>
-					{apiError}
-				</Alert>
-			</Snackbar>
+				{apiError}
+			</ScreenSnackbar>
 		</Page>
 	)
 }
