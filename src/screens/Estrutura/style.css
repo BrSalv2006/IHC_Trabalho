@@ -1,0 +1,11 @@
+.estrutura-content-box {
+	gap: 0px;
+}
+
+.estrutura-main-title {
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--Text-Primary);
+	margin: 0 0 0 0;
+	text-align: left;
+}

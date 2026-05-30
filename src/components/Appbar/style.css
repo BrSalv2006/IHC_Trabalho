@@ -4,7 +4,7 @@
 	align-items: center;
 	gap: 16px;
 	width: fit-content;
-	margin: 40px auto 40px auto;
+	margin: 40px auto 0 auto;
 	padding: 8px 8px;
 	border-radius: 50px;
 	background-color: var(--Background-Surface);

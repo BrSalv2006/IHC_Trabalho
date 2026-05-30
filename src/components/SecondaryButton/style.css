@@ -1,6 +1,6 @@
 .secondary-button {
 	background: var(--Button-Secondary-Default);
-	color: var(--Text-Inverted);
+	color: var(--Text-Primary);
 	border-radius: 15px;
 	border: 1px solid var(--Border-Default);
 	padding: 12px 0;

@@ -1,0 +1,50 @@
+.tonalidade-content-box {
+	gap: 16px;
+}
+
+.tonalidade-main-title {
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--Text-Primary);
+	margin: 0;
+	text-align: center;
+}
+
+.tonalidade-buttons-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 0px;
+	margin-top: 8px;
+}
+
+.tonalidade-svg-container {
+	flex: 1;
+	min-height: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 16px 0;
+}
+
+.tonalidade-wedge-path {
+	fill: var(--Button-Secondary-Default);
+	stroke: var(--Border-Default);
+	stroke-width: 1;
+	cursor: pointer;
+	transition: fill 0.2s ease;
+}
+
+.tonalidade-wedge-path:hover {
+	fill: var(--Button-Secondary-Hover);
+}
+
+.tonalidade-wedge-path:active {
+	fill: var(--Button-Secondary-Pressed);
+}
+
+.tonalidade-wedge-text {
+	pointer-events: none;
+	font-size: 10px;
+	fill: var(--Text-Primary);
+}
